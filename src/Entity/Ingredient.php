@@ -4,16 +4,16 @@ namespace App\Entity;
 
 use App\Repository\IngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
+#[UniqueEntity('name')]
 class Ingredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
@@ -28,14 +28,14 @@ class Ingredient
     private ?float $price = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt = null;
-    #[Assert\NotBlank()]
 
+    // Constructor
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
     }
-
 
     public function getId(): ?int
     {
@@ -47,7 +47,7 @@ class Ingredient
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -78,5 +78,3 @@ class Ingredient
         return $this;
     }
 }
-// 13 #[ORM\Column(type: 'interger')]
-// 14 private $id;
