@@ -68,8 +68,18 @@ class IngredientController extends AbstractController
         }
         return $this->render('pages/ingredient/new.html.twig', ['form' =>$form->createView()]);
     }
+    
+
 
     #[Route('ingredient/edition/{id}', 'ingredient.edit', methods:['GET','POST'])]
+            /**
+     * This controller allow us to edit a new ingredient
+     *
+     * @param Ingredient $ingredient
+     * @param Request $request
+     * @param EntityManagerInterface $manager
+     * @return Response
+     */
     public function edit(
         Ingredient $ingredient,
         Request $request,
@@ -97,7 +107,14 @@ class IngredientController extends AbstractController
         ]);
     }
 
-    #[Route('/ingredient/suppression/{id}', 'ingredient.delete', methods: ['GET'])]    
+    #[Route('/ingredient/suppression/{id}', 'ingredient.delete', methods: ['GET'])]
+    /**
+     * This controller allow us to delete an ingredient
+     *
+     * @param EntityManagerInterface $manager
+     * @param Ingredient $ingredient
+     * @return Response
+     */    
     public function delete(
         EntityManagerInterface $manager,
         Ingredient $ingredient
