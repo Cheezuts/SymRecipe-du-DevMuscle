@@ -88,7 +88,11 @@ class RecipeController extends AbstractController
         EntityManagerInterface $manager
     ): Response 
     {
-        $form = $this->createForm(RecipeType::class, $recipe);
+        $label = $recipe->getId() ? 'Modifier ma recette' : 'Créer ma recette';
+
+        $form = $this->createForm(RecipeType::class, $recipe, [
+            'submit_label' =>$label,
+        ]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

@@ -146,7 +146,7 @@ class RecipeType extends AbstractType
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ],
-                'label' => 'Modifier ma recette'
+                'label' => $options['submit_label']
             ])
         ;
     }
@@ -155,6 +155,7 @@ class RecipeType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Recipe::class,
+            'submit_label' => 'Créer ma recette',
         ]);
     }
 }
